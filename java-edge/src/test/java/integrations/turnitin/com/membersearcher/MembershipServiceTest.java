@@ -8,6 +8,7 @@ import integrations.turnitin.com.membersearcher.client.MembershipBackendClient;
 import integrations.turnitin.com.membersearcher.model.Membership;
 import integrations.turnitin.com.membersearcher.model.MembershipList;
 import integrations.turnitin.com.membersearcher.model.User;
+import integrations.turnitin.com.membersearcher.model.UserList;
 import integrations.turnitin.com.membersearcher.service.MembershipService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,8 @@ public class MembershipServiceTest {
 	private ObjectMapper objectMapper;
 
 	private MembershipList members;
+
+	private UserList userList;
 
 	private User userOne;
 
@@ -57,9 +60,9 @@ public class MembershipServiceTest {
 				.setId("2")
 				.setName("test two")
 				.setEmail("test2@example.com");
+		userList = new UserList().setUsers(List.of(userOne, userTwo));
 		when(membershipBackendClient.fetchMemberships()).thenReturn(CompletableFuture.completedFuture(members));
-		when(membershipBackendClient.fetchUser("1")).thenReturn(CompletableFuture.completedFuture(userOne));
-		when(membershipBackendClient.fetchUser("2")).thenReturn(CompletableFuture.completedFuture(userTwo));
+		when(membershipBackendClient.fetchUsers()).thenReturn(CompletableFuture.completedFuture(userList));
 	}
 
 	@Test
