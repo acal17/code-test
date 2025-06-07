@@ -48,7 +48,7 @@ const App: FC<any> = () => {
               <tbody>
                   { memberships.filter(membership => !search
                     || membership.user?.name.toLowerCase().includes(search.toLowerCase())
-                    || membership.user?.email.includes(search))
+                    || membership.user?.email.toLowerCase().includes(search.toLowerCase()))
                     .map(membership => (
                       <tr key={membership.id}>
                         <td>{membership.user?.name}</td>
